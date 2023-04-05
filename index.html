@@ -21,25 +21,45 @@
                 </a> <!-- #branding -->
 
                 <div class="main-navigation">
-                    <nav>
-                        <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-                        <ul class="menu">
-                            <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                            <li class="menu-item"> FlatDango Cinemas</a></li>
-                            <li class="menu-item">Contact</a></li>
-                        </ul> <!-- .menu -->
-    
-                        <form action="#" class="search-form">
-                            <input type="text" placeholder="Search...">
-                            <button><i class="fa fa-search"></i></button>
-                        </form>
-                    </nav>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="#">Main Menu</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                      
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Available Movies
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              </div>
+                            </li>
+                          </ul>
+                          <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                          </form>
+                        </div>
+                      </nav>
+      
                 </div> <!-- .main-navigation -->
-
-                <div class="mobile-navigation"></div>
-            </div>
+         </div>
         </header>
         <main class="main-content">
+            <div class="dropdown list">
+                <h1>Available Films</h1>
+                <ul id = "films">
+                  
+                </ul>
+            </div>
             <div class="container">
                 <div class="page">
                     <div class="col">
@@ -56,3 +76,6 @@
     <script src="./main.js"></script>
 </body>
 </html>
+
+
+

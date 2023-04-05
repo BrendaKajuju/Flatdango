@@ -1,5 +1,7 @@
 const baseURL = `https://my-json-server.typicode.com/BrendaKajuju/Flatdango/films`
 const nowPLayingUl = document.getElementById('now-playing')
+const filmsUl = document.getElementById('films'); // Added line to get the films ul element
+
 // Core deliverable 1: See the movie details when page loads
 function getNowPlayingMovies() {
     fetch(baseURL)
@@ -21,13 +23,15 @@ function getNowPlayingMovies() {
        }
         )
         //Map through the  movies and use a calback function
+    moviesArr.map(displayFilms);    
     moviesArr.map(displayMovies)})
   };
 
   function displayMovies(movieObj) {
     let HTMLTemplate = `
-      <li class="col-md-10 mx-7">
-        <div class="card" style="width: 30rem;">
+      <li class="col-md-10 mx-10">
+      <div class = "row">
+        <div class="card" style="width: 20rem;">
           <img src="${movieObj.image}" class="card-img-top" alt="${movieObj.title}">
           <div class="card-body">
             <h5 class="card-title">${movieObj.title}</h5>
@@ -39,11 +43,19 @@ function getNowPlayingMovies() {
             <button type="button" class="btn btn-primary" data-id="${movieObj.id}">Buy Tickets</button>
             </div>
         </div>
+        </div>
       </li>
     `;
     nowPLayingUl.innerHTML += HTMLTemplate;
   }
-
+    // Function to display movies in the films section
+function displayFilms(movieObj) {
+  let HTMLTemplate = `
+  <li class="card-title">${movieObj.title}</li>
+  `;
+  filmsUl.innerHTML += HTMLTemplate;
+}
+// Event handler for buy ticket functions
   function buyTicketBtnClick(event) {
     if (event.target.classList.contains("btn-primary")) {
       const ticketButton = event.target;
