@@ -8,6 +8,7 @@ function getNowPlayingMovies() {
        const movies = data;
        let moviesArr = movies.map(movie => {
         let movieObj = {
+            id: movie.id, // add an id property to the movie object
             title: movie.title,
             runtime: movie.runtime,
             capacity: movie.capacity,
@@ -35,46 +36,32 @@ function getNowPlayingMovies() {
             <p class="card-text">${movieObj.description}</p>
             <p class="card-text">Available seats: <span id="available-seats-${movieObj.id}">${movieObj.capacity}</span></p>
             <p class="card-text">Tickets Sold: <span id="movie-tickets-${movieObj.id}">${movieObj.tickets_sold}</span></p>
-            <button type="button" class="btn btn-primary buy-ticket-btn" data-id="${movieObj.id}">Buy Tickets</button>
-          </div>
+            <button type="button" class="btn btn-primary" data-id="${movieObj.id}">Buy Tickets</button>
+            </div>
         </div>
       </li>
     `;
     nowPLayingUl.innerHTML += HTMLTemplate;
-  
-    const buyTicketBtn = document.querySelector(`button[data-id="${movieObj.id}"]`);
-    const availableSeats = document.getElementById(`available-seats-${movieObj.id}`);
-    const movieTickets = document.getElementById(`movie-tickets-${movieObj.id}`);
-  
-    buyTicketBtn.addEventListener('click', () => {
+  }
+
+  function buyTicketBtnClick(event) {
+    if (event.target.classList.contains("btn-primary")) {
+      const ticketButton = event.target;
+      const movieId = ticketButton.dataset.id;
+      const availableSeats = document.getElementById(`available-seats-${movieId}`);
+      const movieTickets = document.getElementById(`movie-tickets-${movieId}`);
       if (parseInt(availableSeats.textContent) === 0) {
         alert(`Sorry, ${movieObj.title} is sold out.`);
       } else {
         availableSeats.textContent = parseInt(availableSeats.textContent) - 1;
         movieTickets.textContent = parseInt(movieTickets.textContent) + 1;
-  
-        // Core Deliverable 3: Update the database
-        const updatedMovieObj = {
-          ...movieObj,
-          capacity: parseInt(availableSeats.textContent),
-          tickets_sold: parseInt(movieTickets.textContent)
-        };
-  
-        fetch(`${baseURL}/${movieObj.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(updatedMovieObj)
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error));
       }
-    });
+    }
   }
+  document.addEventListener('DOMContentLoaded', function() {
+    getNowPlayingMovies();
+    document.addEventListener('click', buyTicketBtnClick); // Add event listener for click event
+  })
   
 
 
-
-getNowPlayingMovies();
